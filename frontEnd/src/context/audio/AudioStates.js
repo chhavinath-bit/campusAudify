@@ -8,7 +8,6 @@ import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile } from '@ffmpeg/util'
 const ffmpeg = new FFmpeg();
 const AudioStates = (props) => {
-	const host = "http://localhost:8000";
 	const audioIntially = [];
 	const [audios, setAudios] = useState(audioIntially);
 	const [ready, setReady] = useState(false);
@@ -18,17 +17,16 @@ const AudioStates = (props) => {
 		await ffmpeg.load();
 		setReady(true);
 	};
-
 	useEffect(() => {
 		load();
 	}, []);
 	const firebaseConfig = {
 		apiKey: process.env.REACT_APP_OUR_SECRET_API,
-		authDomain: "campus-audify.firebaseapp.com",
-		projectId: "campus-audify",
-		storageBucket: "campus-audify.appspot.com",
-		messagingSenderId: "802394273530",
-		appId: "1:802394273530:web:a7f9b0a787c3b7ea167b43",
+		authDomain: process.env.REACT_APP_OUR_AUTHDOMAIN,
+		projectId: process.env.REACT_APP_OUR_PROJECTID,
+		storageBucket: process.env.REACT_APP_OUR_STORAGEBUCKET,
+		messagingSenderId: process.env.REACT_APP_OUR_MESSAGINGSENDERID,
+		appId: process.env.REACT_APP_OUR_APPID,
 	};
 
 	// Initialize Firebase
@@ -44,7 +42,7 @@ const AudioStates = (props) => {
 	// }
 	const fetchAllAudio = async () => {
 		setIsConverting(true)
-		const response = await fetch(`${host}/api/audio/fetchallaudio`, {
+		const response = await fetch(`${process.env.REACT_APP_OUR_HOST}/api/audio/fetchallaudio`, {
 			method: "GET",
 
 			headers: {
@@ -124,7 +122,7 @@ const AudioStates = (props) => {
 			}))
 			return;
 		}
-		const response = await fetch(`${host}/api/audio/addaudio`, {
+		const response = await fetch(`${process.env.REACT_APP_OUR_HOST}/api/audio/addaudio`, {
 			method: "POST", // *GET, POST, PUT, DELETE, etc.
 
 			headers: {
@@ -140,7 +138,7 @@ const AudioStates = (props) => {
 		setAudios(audios.concat(Json));
 	};
 	const updateAudio = async (id, description) => {
-		const response = await fetch(`${host}/api/audio/updateaudio/${id}`, {
+		const response = await fetch(`${process.env.REACT_APP_OUR_HOST}/api/audio/updateaudio/${id}`, {
 			method: "PUT",
 
 			headers: {
@@ -168,7 +166,7 @@ const AudioStates = (props) => {
 			sessionStorage.setItem("audios", JSON.stringify(newAudios));
 			return;
 		}
-		const response = await fetch(`${host}/api/audio/deleteaudio/${id}`, {
+		const response = await fetch(`${process.env.REACT_APP_OUR_HOST}/api/audio/deleteaudio/${id}`, {
 			method: "DELETE",
 
 			headers: {
