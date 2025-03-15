@@ -3,7 +3,6 @@ const fetchuser = require("../middleware/fetchuser");
 const Audio = require("../models/Audio");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
-//Route 1: get all the audio : GET 'http://localhost:5000/api/audio/fetchallaudio'. login required
 router.get("/fetchallaudio", fetchuser, async (req, res) => {
   try {
     const audio = await Audio.find({ user: req.user.id });

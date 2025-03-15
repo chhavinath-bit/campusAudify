@@ -3,7 +3,7 @@ const User = require("../models/User");
 const router = express.Router();
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
-var JWT_SECRET = "chhavinathkaapp";
+JWT_SECRET = process.env.JWT_SECRET;
 const { body, validationResult } = require("express-validator");
 const fetchuser = require("../middleware/fetchuser");
 //Route 1: Authetication for create a user POST 'http://localhost:5000/api/auth/createUser'
