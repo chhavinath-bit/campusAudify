@@ -6,8 +6,7 @@ var cors = require('cors')
 connectToMongo();
 
 
-
-app.use(cors())
+app.use(cors({ origin: 'https://campusaudify-client.onrender.com' }))
 app.use(express.json())
 const port = 8000;
 
